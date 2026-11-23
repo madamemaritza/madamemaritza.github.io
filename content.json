@@ -1,0 +1,390 @@
+{
+  "settings": {
+    "name": "Maritza Cieza",
+    "email": "[email]",
+    "github": "https://github.com/madamemaritza",
+    "linkedin": "https://linkedin.com/in/maritzacieza",
+    "tiktok": "",
+    "resume_en": "",
+    "resume_fr": ""
+  },
+  "hero": {
+    "eyebrow": {
+      "en": "HI, I'M",
+      "fr": "BONJOUR, JE SUIS"
+    },
+    "pill": {
+      "en": "Hyperautomation consultant · Peru and France",
+      "fr": "Consultante en hyperautomatisation · Pérou et France"
+    },
+    "title_a": {
+      "en": "Process Intelligence",
+      "fr": "Process Intelligence"
+    },
+    "title_b": {
+      "en": "AI Automation",
+      "fr": "Automatisation IA"
+    },
+    "promise": {
+      "en": "I help companies stop losing time on work that shouldn't exist. I find it with process mining, remove it with Lean, and automate the rest with deterministic workflows and AI agents.",
+      "fr": "J'aide les entreprises à arrêter de perdre du temps sur un travail qui ne devrait pas exister. Je le trouve avec le process mining, je le supprime avec le Lean, et j'automatise le reste avec des workflows déterministes et des agents IA."
+    },
+    "sticker": {
+      "en": "Open to roles in France!",
+      "fr": "Disponible en France !"
+    },
+    "photo": "assets/maritza-photo.jpg"
+  },
+  "stats": [
+    {
+      "value": "~50",
+      "label": {
+        "en": "automations delivered",
+        "fr": "automatisations livrées"
+      },
+      "color": "lavender"
+    },
+    {
+      "value": "400+",
+      "label": {
+        "en": "professionals trained",
+        "fr": "professionnels formés"
+      },
+      "color": "lilac"
+    },
+    {
+      "value": "~8k",
+      "label": {
+        "en": "people learning BPMN and process mining with me",
+        "fr": "personnes qui apprennent le BPMN et le process mining avec moi"
+      },
+      "color": "pink"
+    }
+  ],
+  "about": {
+    "eyebrow": {
+      "en": "ABOUT ME",
+      "fr": "À PROPOS"
+    },
+    "title_a": {
+      "en": "I work from",
+      "fr": "Je travaille à partir des"
+    },
+    "title_b": {
+      "en": "data, not from opinions.",
+      "fr": "données, pas des opinions."
+    },
+    "p1": {
+      "en": "I'm a hyperautomation consultant with ten years in finance, consulting and startups, in Peru and in France.",
+      "fr": "Je suis consultante en hyperautomatisation, avec dix ans d'expérience en finance, en conseil et en startups, au Pérou et en France."
+    },
+    "p2": {
+      "en": "Process mining shows me how the work really happens. With Lean I cut the waste: rework, approvals nobody needs, handoffs that only add waiting time. What's left gets automated.",
+      "fr": "Le process mining me montre comment le travail se fait vraiment. Avec le Lean, je supprime le gaspillage : reprises, validations inutiles, transferts qui n'ajoutent que de l'attente. Ce qui reste est automatisé."
+    },
+    "pills": [
+      {
+        "en": "Passeport Talent until 2029",
+        "fr": "Passeport Talent jusqu'en 2029"
+      },
+      {
+        "en": "EN · FR · ES",
+        "fr": "FR · EN · ES"
+      },
+      {
+        "en": "Celonis Back to Work 2026",
+        "fr": "Celonis Back to Work 2026"
+      }
+    ],
+    "photo": "assets/maritza-square.jpg"
+  },
+  "method": {
+    "eyebrow": {
+      "en": "HOW I WORK",
+      "fr": "MA MÉTHODE"
+    },
+    "title_a": {
+      "en": "Remove first",
+      "fr": "Supprimer d'abord"
+    },
+    "title_b": {
+      "en": "automate later",
+      "fr": "automatiser ensuite"
+    },
+    "intro": {
+      "en": "My method, drawn the way I draw every process: as a BPMN pool. The first lane removes work. Automations and agents only come in the second.",
+      "fr": "Ma méthode, dessinée comme je dessine chaque processus : en pool BPMN. Le premier couloir supprime du travail. Les automatisations et les agents n'arrivent que dans le second."
+    },
+    "lane1": {
+      "en": "I remove work",
+      "fr": "Je supprime du travail"
+    },
+    "lane2": {
+      "en": "I automate what's left",
+      "fr": "J'automatise le reste"
+    },
+    "marker": {
+      "en": "automations and agents start here",
+      "fr": "les automatisations et les agents commencent ici"
+    },
+    "image": "assets/laptop-bpmn.png"
+  },
+  "steps": [
+    {
+      "lane": "1",
+      "title": {
+        "en": "See",
+        "fr": "Voir"
+      },
+      "text": {
+        "en": "Process mining on the event logs and gemba walks with the team.",
+        "fr": "Process mining sur les event logs et gemba walks avec l'équipe."
+      },
+      "tools": "Celonis, Gemba"
+    },
+    {
+      "lane": "1",
+      "title": {
+        "en": "Kill",
+        "fr": "Supprimer"
+      },
+      "text": {
+        "en": "Every step has to justify itself. The ones that add nothing go.",
+        "fr": "Chaque étape doit se justifier. Celles qui n'apportent rien disparaissent."
+      },
+      "tools": "Lean, VSM"
+    },
+    {
+      "lane": "1",
+      "title": {
+        "en": "Simplify",
+        "fr": "Simplifier"
+      },
+      "text": {
+        "en": "Fewer variants and handoffs, until it fits on one page.",
+        "fr": "Moins de variantes et de transferts, jusqu'à tenir sur une page."
+      },
+      "tools": "SIPOC, Variants"
+    },
+    {
+      "lane": "2",
+      "title": {
+        "en": "Standardize",
+        "fr": "Standardiser"
+      },
+      "text": {
+        "en": "One way of working that the team agrees on, modeled in BPMN.",
+        "fr": "Une seule façon de faire, validée par l'équipe et modélisée en BPMN."
+      },
+      "tools": "BPMN 2.0"
+    },
+    {
+      "lane": "2",
+      "title": {
+        "en": "Automate",
+        "fr": "Automatiser"
+      },
+      "text": {
+        "en": "Deterministic workflows for the stable, rule-based steps.",
+        "fr": "Des workflows déterministes pour les étapes stables et basées sur des règles."
+      },
+      "tools": "UiPath, Power Automate, n8n"
+    },
+    {
+      "lane": "2",
+      "title": {
+        "en": "Augment",
+        "fr": "Augmenter"
+      },
+      "text": {
+        "en": "AI agents for the steps that need reading, writing or judgment.",
+        "fr": "Des agents IA pour les étapes qui demandent de lire, d'écrire ou de juger."
+      },
+      "tools": "AI agents, LLMs"
+    }
+  ],
+  "cases": [
+    {
+      "label": {
+        "en": "PROCESS INTELLIGENCE",
+        "fr": "PROCESS INTELLIGENCE"
+      },
+      "title": {
+        "en": "Redesigned Order-to-Cash with process mining and took DSO from [X] to [Y] days",
+        "fr": "Refonte de l'Order-to-Cash avec le process mining : DSO de [X] à [Y] jours"
+      },
+      "summary": {
+        "en": "Consumer goods company, Peru. Process mining on SAP data and gemba walks, Lean office to remove rework, then RPA, a Power BI cockpit and a payment-risk score.",
+        "fr": "Entreprise de grande consommation, Pérou. Process mining sur SAP et gemba walks, Lean office pour supprimer les reprises, puis RPA, cockpit Power BI et score de risque de paiement."
+      },
+      "metrics": "[DSO], [% overdue], [cycle days]",
+      "image": "",
+      "color": "lavender",
+      "link": "",
+      "button": {
+        "en": "Read the case",
+        "fr": "Lire le cas"
+      }
+    },
+    {
+      "label": {
+        "en": "INTELLIGENT AUTOMATION",
+        "fr": "AUTOMATISATION INTELLIGENTE"
+      },
+      "title": {
+        "en": "Delivered ~50 Procure-to-Pay automations for a shared services center serving 4 countries",
+        "fr": "Une cinquantaine d'automatisations Procure-to-Pay pour un CSP qui couvre 4 pays"
+      },
+      "summary": {
+        "en": "Alicorp. I mapped what every person in the center spent their time on, ranked the backlog against the balanced scorecard, and cleaned up each process before it got automated with UiPath.",
+        "fr": "Alicorp. J'ai cartographié le temps de chaque personne du centre, priorisé le backlog selon le balanced scorecard, et nettoyé chaque processus avant de l'automatiser avec UiPath."
+      },
+      "metrics": "~50 automations, 4 countries, 50 key users",
+      "image": "",
+      "color": "lilac",
+      "link": "",
+      "button": {
+        "en": "Read the case",
+        "fr": "Lire le cas"
+      }
+    },
+    {
+      "label": {
+        "en": "AI AUTOMATION",
+        "fr": "AUTOMATISATION IA"
+      },
+      "title": {
+        "en": "Built Bernie, a tool that turns a process description into a working workflow",
+        "fr": "Bernie, un outil qui transforme la description d'un processus en workflow"
+      },
+      "summary": {
+        "en": "Side project. You describe a process in plain language. Bernie structures it, points out steps worth questioning, and turns the result into a workflow.",
+        "fr": "Projet personnel. Vous décrivez un processus en langage naturel. Bernie le structure, signale les étapes à remettre en question et le transforme en workflow."
+      },
+      "metrics": "[metric 1], [metric 2]",
+      "image": "assets/bernie.jpg",
+      "color": "pink",
+      "link": "",
+      "button": {
+        "en": "Try the demo",
+        "fr": "Tester la démo"
+      }
+    }
+  ],
+  "brands": [
+    {
+      "name": "Alicorp",
+      "via": "",
+      "logo": ""
+    },
+    {
+      "name": "Grupo Breca",
+      "via": "",
+      "logo": ""
+    },
+    {
+      "name": "La French Tech Lyon",
+      "via": "",
+      "logo": ""
+    },
+    {
+      "name": "TotalEnergies",
+      "via": "via RPROTON",
+      "logo": "assets/logos/totalenergies.svg"
+    },
+    {
+      "name": "BNP Paribas",
+      "via": "via RPROTON",
+      "logo": "assets/logos/bnp-paribas.svg"
+    },
+    {
+      "name": "SUEZ",
+      "via": "",
+      "logo": "assets/logos/suez.svg"
+    },
+    {
+      "name": "EDF",
+      "via": "via RPROTON",
+      "logo": "assets/logos/edf.svg"
+    }
+  ],
+  "certs": [
+    {
+      "name": "Celonis Foundations",
+      "image": "assets/celonis-foundations.png",
+      "link": ""
+    }
+  ],
+  "lab": [
+    {
+      "title": "Text-to-SIPOC",
+      "text": {
+        "en": "Plain words in, SIPOC out",
+        "fr": "Du texte en entrée, un SIPOC en sortie"
+      },
+      "link": "",
+      "color": "lavender"
+    },
+    {
+      "title": "Job Hunting Hub",
+      "text": {
+        "en": "Agents, Supabase, GitHub",
+        "fr": "Agents, Supabase, GitHub"
+      },
+      "link": "",
+      "color": "lilac"
+    },
+    {
+      "title": "This site",
+      "text": {
+        "en": "A visual CMS I built myself",
+        "fr": "Un CMS visuel construit par moi"
+      },
+      "link": "",
+      "color": "pink"
+    }
+  ],
+  "testimonials": [
+    {
+      "quote": {
+        "en": "[Testimonial from a former manager, 3 to 5 lines.]",
+        "fr": "[Témoignage d'un ancien manager, 3 à 5 lignes.]"
+      },
+      "name": "[Full name]",
+      "role": "[Job title]",
+      "photo": ""
+    },
+    {
+      "quote": {
+        "en": "[Testimonial from a key user.]",
+        "fr": "[Témoignage d'un key user.]"
+      },
+      "name": "[Full name]",
+      "role": "[Job title]",
+      "photo": ""
+    },
+    {
+      "quote": {
+        "en": "[Testimonial from a student or a French Tech founder.]",
+        "fr": "[Témoignage d'une élève ou d'un fondateur French Tech.]"
+      },
+      "name": "[Full name]",
+      "role": "[Job title]",
+      "photo": ""
+    }
+  ],
+  "contact": {
+    "title_a": {
+      "en": "Is there a process your team",
+      "fr": "Un processus dont votre équipe"
+    },
+    "title_b": {
+      "en": "keeps complaining about?",
+      "fr": "se plaint encore et encore ?"
+    },
+    "facts": {
+      "en": "Passeport Talent until 2029 · EN (C1), FR [level], ES · [Lyon / Paris], hybrid or remote · available from [date]",
+      "fr": "Passeport Talent jusqu'en 2029 · FR [niveau], EN (C1), ES · [Lyon / Paris], hybride ou télétravail · disponible à partir du [date]"
+    }
+  }
+}

@@ -1,0 +1,139 @@
+(function () {
+  'use strict';
+
+  var params = new URLSearchParams(location.search);
+  var lang = params.get('lang') || localStorage.getItem('mc-lang') || 'en';
+  if (lang !== 'en' && lang !== 'fr') lang = 'en';
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function t(v) {
+    if (v == null) return '';
+    if (typeof v === 'string') return esc(v);
+    return esc(v[lang] || v.en || '');
+  }
+  function list(s) { return String(s || '').split(',').map(function (x) { return x.trim(); }).filter(Boolean); }
+  function visible(arr) { return (arr || []).filter(function (x) { return !x.hidden; }); }
+  function color(c) { return ['lavender', 'lilac', 'pink', 'orchid', 'white'].indexOf(c) >= 0 ? c : 'lavender'; }
+  function link(u) { return u ? esc(u) : '#'; }
+  var ARROW = '<svg class="arrow" viewBox="0 0 30 12" aria-hidden="true"><path d="M0 6 H24 M18 1 L26 6 L18 11" fill="none" stroke="#2B2A57" stroke-width="2"/></svg>';
+
+  function render(c) {
+    var s = c.settings || {}, h = c.hero || {}, a = c.about || {}, m = c.method || {}, ct = c.contact || {};
+    var steps = visible(c.steps);
+    var lane = function (n) { return steps.filter(function (x) { return String(x.lane) === n; }); };
+    var num = 0;
+    var task = function (st) {
+      num += 1;
+      var chips = list(st.tools).map(function (x) { return '<span class="chip">' + esc(x) + '</span>'; }).join('');
+      return '<div class="task' + (num === 2 ? ' hot' : '') + '"><div class="task-num">0' + num + '</div><h3 class="hand">' + t(st.title) + '</h3><p>' + t(st.text) + '</p><div class="chips">' + chips + '</div></div>';
+    };
+    var laneHtml = function (items) { return items.map(task).join(ARROW); };
+    var l1 = lane('1'), l2 = lane('2');
+    var resume = lang === 'fr' ? (s.resume_fr || s.resume_en) : (s.resume_en || s.resume_fr);
+    var brands = visible(c.brands).map(function (b) {
+      return '<span class="brand">' + (b.logo ? '<img src="' + esc(b.logo) + '" alt="' + esc(b.name) + '">' : esc(b.name)) + (b.via ? ' <small>' + esc(b.via) + '</small>' : '') + '</span>';
+    }).join('');
+    var ui = lang === 'fr'
+      ? { about: 'À propos', how: 'Méthode', cases: 'Projets', wordsNav: 'Témoignages', resume: 'CV', work: 'Voir mes projets', casesEy: 'ÉTUDES DE CAS', casesT1: 'Un projet pour', casesT2: 'chaque chose que je fais', brands: 'ENTREPRISES AVEC QUI J’AI TRAVAILLÉ', lab: 'LE LAB', labT: 'Les projets que je construis pour apprendre', words: 'TÉMOIGNAGES', wordsT: 'Ce qu’on dit de moi', talk: 'PARLONS-EN', s1: 'Télécharger mon CV', s1b: 'FR ou EN', s2: 'M’envoyer un email', s2b: 'Je réponds vite', s3: 'Voir mon code sur GitHub', s3b: 'Bernie, Text-to-SIPOC et plus', photo: 'Photo de Maritza Cieza' }
+      : { about: 'About me', how: 'How I work', cases: 'Case studies', wordsNav: 'Kind words', resume: 'Resume', work: 'See my work', casesEy: 'CASE STUDIES', casesT1: 'One for each', casesT2: 'thing I do', brands: 'COMPANIES I’VE WORKED WITH', lab: 'THE LAB', labT: 'Side projects I build to learn', words: 'KIND WORDS', wordsT: 'What people say', talk: 'LET’S TALK', s1: 'Download my resume', s1b: 'EN or FR', s2: 'Send me an email', s2b: 'I reply quickly', s3: 'See my code on GitHub', s3b: 'Bernie, Text-to-SIPOC and more', photo: 'Photo of Maritza Cieza' };
+
+    document.documentElement.lang = lang;
+    return '' +
+    '<header class="topbar pad"><a class="logo name-font" style="font-size:24px" href="#top">' + esc(s.name) + '</a><nav class="nav" aria-label="Main">' +
+      '<a href="#about">' + ui.about + '</a><a href="#method">' + ui.how + '</a><a href="#work">' + ui.cases + '</a><a href="#words">' + ui.wordsNav + '</a>' +
+      (s.github ? '<a href="' + link(s.github) + '">GitHub</a>' : '') +
+      '<button class="lang" type="button" id="lang">' + (lang === 'en' ? 'FR' : 'EN') + '</button>' +
+      '<a class="btn btn-ink" style="padding:10px 22px" href="' + link(resume) + '">' + ui.resume + '</a></nav></header>' +
+
+    '<section id="top" class="hero pad"><div class="hero-text">' +
+      '<p class="eyebrow">' + t(h.eyebrow) + '</p><p class="hero-name">' + esc(s.name) + '</p>' +
+      '<span class="pill bg-lavender" style="font-weight:500;font-size:15px">' + t(h.pill) + '</span>' +
+      '<h1>' + t(h.title_a) + '<br><span class="violet">+</span> <span class="orchid">' + t(h.title_b) + '</span></h1>' +
+      '<p class="hero-promise">' + t(h.promise) + '</p>' +
+      '<div class="hero-actions"><a class="btn btn-ink" href="#work">' + ui.work + '</a>' +
+        (s.github ? '<a class="btn bg-lavender" href="' + link(s.github) + '">GitHub ↗</a>' : '') +
+        (s.linkedin ? '<a class="btn bg-pink" href="' + link(s.linkedin) + '">LinkedIn ↗</a>' : '') + '</div></div>' +
+      '<div class="hero-photo"><div class="frame"><img class="frame-img" src="assets/frame-lilac.webp" alt="">' +
+        (h.photo ? '<img class="frame-photo" src="' + esc(h.photo) + '" alt="' + ui.photo + '">' : '') + '</div>' +
+        (t(h.sticker) ? '<span class="sticker">' + t(h.sticker) + '</span>' : '') + '</div></section>' +
+
+    '<section class="pad" aria-label="Key numbers" style="padding-bottom:0"><div class="grid grid-3">' +
+      visible(c.stats).map(function (x) { return '<div class="card bg-' + color(x.color) + '"><div class="stat-value">' + esc(x.value) + '</div><div class="stat-label">' + t(x.label) + '</div></div>'; }).join('') +
+    '</div></section>' +
+
+    '<section id="about" class="about pad"><div class="about-photo">' + (a.photo ? '<img src="' + esc(a.photo) + '" alt="' + ui.photo + '">' : '') + '</div>' +
+      '<div class="about-text"><p class="eyebrow">' + t(a.eyebrow) + '</p><h2 class="h2">' + t(a.title_a) + ' <span class="orchid">' + t(a.title_b) + '</span></h2>' +
+      '<p>' + t(a.p1) + '</p><p>' + t(a.p2) + '</p><div class="pills">' +
+      (a.pills || []).map(function (p, i) { return '<span class="pill bg-' + ['lavender', 'lilac', 'pink'][i % 3] + '">' + t(p) + '</span>'; }).join('') +
+    '</div></div></section>' +
+
+    '<section id="method" class="method pad bg-white"><div class="method-head"><div><p class="eyebrow">' + t(m.eyebrow) + '</p>' +
+      '<h2 class="h2">' + t(m.title_a) + ' <span class="violet">+</span> <span class="orchid">' + t(m.title_b) + '</span></h2><p class="method-intro">' + t(m.intro) + '</p></div>' +
+      (m.image ? '<img src="' + esc(m.image) + '" alt="">' : '') + '</div>' +
+      '<div class="pool" role="img" aria-label="' + t(m.lane1) + ' / ' + t(m.lane2) + '">' +
+        '<div class="lane lane-1"><div class="lane-label"><span>' + t(m.lane1) + '</span></div><div class="lane-body"><span class="event" aria-hidden="true"></span>' + ARROW + laneHtml(l1) + '</div></div>' +
+        '<div class="lane lane-2"><div class="lane-label"><span>' + t(m.lane2) + '</span></div><div class="lane-body"><span class="marker">' + t(m.marker) + '</span>' + laneHtml(l2) + ARROW + '<span class="event end" aria-hidden="true"></span></div></div>' +
+      '</div></section>' +
+
+    '<section id="work" class="cases pad"><p class="eyebrow">' + ui.casesEy + '</p><h2 class="h2" style="margin-bottom:40px">' + ui.casesT1 + ' <span class="orchid">' + ui.casesT2 + '</span></h2><div class="grid grid-3">' +
+      visible(c.cases).map(function (k) {
+        return '<article class="case bg-white"><div class="case-img bg-' + color(k.color) + '">' + (k.image ? '<img src="' + esc(k.image) + '" alt="">' : '[image]') + '</div>' +
+          '<div class="case-body"><span class="case-label">' + t(k.label) + '</span><h3>' + t(k.title) + '</h3><p>' + t(k.summary) + '</p>' +
+          '<div class="chips">' + list(k.metrics).map(function (x) { return '<span class="chip">' + esc(x) + '</span>'; }).join('') + '</div>' +
+          '<a class="btn btn-ink" href="' + link(k.link) + '">' + t(k.button) + '</a></div></article>';
+      }).join('') + '</div></section>' +
+
+    '<section class="brands" aria-label="Companies"><p class="eyebrow" style="text-align:center;margin-bottom:20px">' + ui.brands + '</p>' +
+      '<div class="marquee"><div class="marquee-track">' + brands + '<span aria-hidden="true" style="display:contents">' + brands + '</span></div></div>' +
+      '<div class="certs">' + visible(c.certs).map(function (x) { return '<a href="' + link(x.link) + '" title="' + esc(x.name) + '">' + (x.image ? '<img src="' + esc(x.image) + '" alt="">' : '') + '<span>' + esc(x.name) + '</span></a>'; }).join('') + '</div></section>' +
+
+    '<section id="lab" class="lab pad"><div><p class="eyebrow">' + ui.lab + '</p><h2 class="h2" style="font-size:36px">' + ui.labT + '</h2></div><div class="lab-grid">' +
+      visible(c.lab).map(function (x) { return '<a class="lab-item bg-' + color(x.color) + '" href="' + link(x.link) + '"><strong>' + esc(x.title) + '</strong><br><span style="font-size:14px">' + t(x.text) + '</span></a>'; }).join('') +
+    '</div></section>' +
+
+    '<section id="words" class="words pad bg-white"><p class="eyebrow">' + ui.words + '</p><h2 class="h2" style="margin-bottom:32px">' + ui.wordsT + '</h2><div class="grid grid-3">' +
+      visible(c.testimonials).map(function (x) { return '<figure class="quote"><blockquote>“' + t(x.quote) + '”</blockquote><figcaption>' + (x.photo ? '<img src="' + esc(x.photo) + '" alt="">' : '') + '<span><strong>' + esc(x.name) + '</strong><br><span class="violet">' + esc(x.role) + '</span></span></figcaption></figure>'; }).join('') +
+    '</div></section>' +
+
+    '<section id="contact" class="contact pad"><h2 class="h2">' + t(ct.title_a) + ' <span class="orchid">' + t(ct.title_b) + '</span></h2><p class="eyebrow" style="margin:0 0 32px">' + ui.talk + '</p>' +
+      '<div class="steps-cta">' +
+        '<a class="step-cta bg-lavender" href="' + link(resume) + '"><span class="step-num">1</span><span><strong>' + ui.s1 + '</strong><br><span style="font-size:14px">' + ui.s1b + '</span></span></a>' +
+        '<a class="step-cta bg-orchid" href="mailto:' + esc(s.email) + '"><span class="step-num">2</span><span><strong>' + ui.s2 + '</strong><br><span style="font-size:14px">' + esc(s.email) + '</span></span></a>' +
+        (s.github ? '<a class="step-cta bg-pink" href="' + link(s.github) + '"><span class="step-num">3</span><span><strong>' + ui.s3 + '</strong><br><span style="font-size:14px">' + ui.s3b + '</span></span></a>' : '') +
+      '</div><p class="facts">' + t(ct.facts) + '</p></section>' +
+
+    '<footer class="footer pad"><span class="name-font" style="font-size:20px">' + esc(s.name) + '</span><span class="links">' +
+      (s.email ? '<a href="mailto:' + esc(s.email) + '">' + esc(s.email) + '</a>' : '') +
+      (s.linkedin ? '<a href="' + link(s.linkedin) + '">LinkedIn</a>' : '') +
+      (s.tiktok ? '<a href="' + link(s.tiktok) + '">TikTok</a>' : '') +
+      (s.github ? '<a href="' + link(s.github) + '">GitHub</a>' : '') +
+    '</span><span>© ' + new Date().getFullYear() + '</span></footer>';
+  }
+
+  function mount(content) {
+    var app = document.getElementById('app');
+    app.innerHTML = render(content);
+    var btn = document.getElementById('lang');
+    if (btn) btn.addEventListener('click', function () {
+      lang = lang === 'en' ? 'fr' : 'en';
+      try { localStorage.setItem('mc-lang', lang); } catch (e) {}
+      mount(content);
+    });
+  }
+
+  // The admin panel sends unsaved drafts here for live preview.
+  window.addEventListener('message', function (e) {
+    if (e.origin !== location.origin || !e.data || e.data.type !== 'mc-preview' || !e.data.content) return;
+    if (e.data.lang) lang = e.data.lang;
+    mount(e.data.content);
+  });
+
+  fetch('content.json?v=' + Date.now(), { cache: 'no-store' })
+    .then(function (r) { return r.json(); })
+    .then(mount)
+    .catch(function () { document.getElementById('app').innerHTML = '<p class="pad" style="padding:48px">Could not load content.json</p>'; });
+})();
