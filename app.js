@@ -91,7 +91,7 @@
 
     '<section class="brands" aria-label="Companies"><p class="eyebrow" style="text-align:center;margin-bottom:20px">' + ui.brands + '</p>' +
       '<div class="marquee"><div class="marquee-track">' + brands + '<span aria-hidden="true" style="display:contents">' + brands + '</span></div></div>' +
-      '<div class="certs">' + visible(c.certs).map(function (x) { return '<a href="' + link(x.link) + '" title="' + esc(x.name) + '">' + (x.image ? '<img src="' + esc(x.image) + '" alt="">' : '') + '<span>' + esc(x.name) + '</span></a>'; }).join('') + '</div></section>' +
+      (visible(c.certs).length ? '<div class="certs">' : '<div class="certs" hidden>') + visible(c.certs).map(function (x) { return '<a href="' + link(x.link) + '" title="' + esc(x.name) + '">' + (x.image ? '<img src="' + esc(x.image) + '" alt="">' : '') + '<span>' + esc(x.name) + '</span></a>'; }).join('') + '</div></section>' +
 
     '<section id="lab" class="lab pad"><div><p class="eyebrow">' + ui.lab + '</p><h2 class="h2" style="font-size:36px">' + ui.labT + '</h2></div><div class="lab-grid">' +
       visible(c.lab).map(function (x) { return '<a class="lab-item bg-' + color(x.color) + '" href="' + link(x.link) + '"><strong>' + esc(x.title) + '</strong><br><span style="font-size:14px">' + t(x.text) + '</span></a>'; }).join('') +

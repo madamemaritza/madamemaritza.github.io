@@ -275,12 +275,12 @@
     {
       "name": "Alicorp",
       "via": "",
-      "logo": ""
+      "logo": "assets/logos/alicorp.svg"
     },
     {
       "name": "Grupo Breca",
       "via": "",
-      "logo": ""
+      "logo": "assets/logos/breca.png"
     },
     {
       "name": "La French Tech Lyon",
@@ -308,13 +308,7 @@
       "logo": "assets/logos/edf.svg"
     }
   ],
-  "certs": [
-    {
-      "name": "Celonis Foundations",
-      "image": "assets/celonis-foundations.png",
-      "link": ""
-    }
-  ],
+  "certs": [],
   "lab": [
     {
       "title": "Text-to-SIPOC",

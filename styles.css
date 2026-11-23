@@ -69,8 +69,17 @@ img { max-width: 100%; display: block; }
 .hero-photo { flex: 1 1 340px; min-width: 0; display: flex; justify-content: center; position: relative; }
 .frame { position: relative; width: 100%; max-width: 380px; aspect-ratio: 686 / 1000; }
 .frame-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; mix-blend-mode: multiply; }
-.frame-photo { position: absolute; left: 17.8%; top: 12.8%; width: 63.6%; height: 70.6%; max-width: none; object-fit: cover; object-position: center top; border-radius: 4px; background: linear-gradient(160deg, var(--lilac) 0%, var(--lavender) 55%, var(--stripe-a) 100%); }
-.sticker { position: absolute; top: -18px; right: -6px; max-width: 190px; background: var(--orchid); color: var(--ink); padding: 26px 26px; border-radius: 50%; font-size: 20px; font-weight: 800; line-height: 1.1; text-align: center; transform: rotate(12deg); border: 3px solid var(--pink); }
+.frame-photo { position: absolute; left: 17.8%; top: 12.8%; width: 65.2%; height: 70.6%; max-width: none; object-fit: cover; object-position: center top; border-radius: 4px; background: var(--cream); }
+@property --shine { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+.sticker { position: absolute; top: -18px; right: -6px; max-width: 190px; color: var(--ink); padding: 26px 26px; border-radius: 50%; font-size: 20px; font-weight: 800; line-height: 1.1; text-align: center; transform: rotate(12deg); border: 5px solid transparent;
+  background: linear-gradient(var(--orchid), var(--orchid)) padding-box,
+    conic-gradient(from var(--shine), #B9BCC8, #F4F5FA, #FFFFFF, #9EA2B3, #E3E5EE, #C6C9D4, #FFFFFF, #A8ACBB, #B9BCC8) border-box;
+  box-shadow: 0 6px 18px rgba(43, 42, 87, .18);
+  animation: shine 3.5s linear infinite; }
+.sticker::after { content: '✦'; position: absolute; top: 2px; left: 14px; font-size: 16px; color: #fff; text-shadow: 0 0 6px #fff; animation: twinkle 2.2s ease-in-out infinite; }
+@keyframes shine { to { --shine: 360deg; } }
+@keyframes twinkle { 0%, 100% { opacity: .15; transform: scale(.6); } 50% { opacity: 1; transform: scale(1.1); } }
+@media (prefers-reduced-motion: reduce) { .sticker, .sticker::after { animation: none; } }
 
 /* bento */
 .grid { display: grid; gap: 28px; }
@@ -136,6 +145,7 @@ img { max-width: 100%; display: block; }
 .brand { display: flex; align-items: center; gap: 8px; font-size: 22px; font-weight: 800; letter-spacing: -0.3px; color: #6E6C86; white-space: nowrap; }
 .brand img { height: 40px; width: auto; max-width: 180px; object-fit: contain; filter: grayscale(1) contrast(1.1); opacity: .75; }
 .brand img[src*="french-tech"] { height: 64px; }
+.brand img[src*="breca"] { height: 28px; }
 .brand small { font-size: 12px; font-weight: 500; }
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; flex-wrap: wrap; width: auto; justify-content: center; } }
