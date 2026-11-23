@@ -33,7 +33,7 @@
       "en": "Open to roles in France!",
       "fr": "Disponible en France !"
     },
-    "photo": "assets/maritza-photo.jpg"
+    "photo": "assets/maritza-photo.webp"
   },
   "stats": [
     {
@@ -96,7 +96,7 @@
         "fr": "Celonis Back to Work 2026"
       }
     ],
-    "photo": "assets/maritza-square.jpg"
+    "photo": "assets/maritza-sticker.webp"
   },
   "method": {
     "eyebrow": {
@@ -285,7 +285,7 @@
     {
       "name": "La French Tech Lyon",
       "via": "",
-      "logo": ""
+      "logo": "assets/logos/la-french-tech.svg"
     },
     {
       "name": "TotalEnergies",

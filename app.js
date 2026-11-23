@@ -43,7 +43,9 @@
 
     document.documentElement.lang = lang;
     return '' +
-    '<header class="topbar pad"><a class="logo name-font" style="font-size:24px" href="#top">' + esc(s.name) + '</a><nav class="nav" aria-label="Main">' +
+    '<header class="topbar pad"><a class="logo name-font" style="font-size:24px" href="#top">' + esc(s.name) + '</a>' +
+      '<button class="menu-btn" type="button" id="menu" aria-expanded="false" aria-controls="mainnav" aria-label="Menu"><span></span><span></span><span></span></button>' +
+      '<nav class="nav" id="mainnav" aria-label="Main">' +
       '<a href="#about">' + ui.about + '</a><a href="#method">' + ui.how + '</a><a href="#work">' + ui.cases + '</a><a href="#words">' + ui.wordsNav + '</a>' +
       (s.github ? '<a href="' + link(s.github) + '">GitHub</a>' : '') +
       '<button class="lang" type="button" id="lang">' + (lang === 'en' ? 'FR' : 'EN') + '</button>' +
@@ -74,9 +76,9 @@
     '<section id="method" class="method pad bg-white"><div class="method-head"><div><p class="eyebrow">' + t(m.eyebrow) + '</p>' +
       '<h2 class="h2">' + t(m.title_a) + ' <span class="violet">+</span> <span class="orchid">' + t(m.title_b) + '</span></h2><p class="method-intro">' + t(m.intro) + '</p></div>' +
       (m.image ? '<img src="' + esc(m.image) + '" alt="">' : '') + '</div>' +
-      '<div class="pool" role="img" aria-label="' + t(m.lane1) + ' / ' + t(m.lane2) + '">' +
+      '<div class="pool" style="--n:' + Math.max(l1.length, l2.length, 1) + '" role="img" aria-label="' + t(m.lane1) + ' / ' + t(m.lane2) + '">' +
         '<div class="lane lane-1"><div class="lane-label"><span>' + t(m.lane1) + '</span></div><div class="lane-body"><span class="event" aria-hidden="true"></span>' + ARROW + laneHtml(l1) + '</div></div>' +
-        '<div class="lane lane-2"><div class="lane-label"><span>' + t(m.lane2) + '</span></div><div class="lane-body"><span class="marker">' + t(m.marker) + '</span>' + laneHtml(l2) + ARROW + '<span class="event end" aria-hidden="true"></span></div></div>' +
+        '<div class="lane lane-2"><div class="lane-label"><span>' + t(m.lane2) + '</span></div><div class="lane-body"><span class="marker">' + t(m.marker) + '</span><span class="ph"></span><span class="ph"></span>' + laneHtml(l2) + ARROW + '<span class="event end" aria-hidden="true"></span></div></div>' +
       '</div></section>' +
 
     '<section id="work" class="cases pad"><p class="eyebrow">' + ui.casesEy + '</p><h2 class="h2" style="margin-bottom:40px">' + ui.casesT1 + ' <span class="orchid">' + ui.casesT2 + '</span></h2><div class="grid grid-3">' +
@@ -114,6 +116,29 @@
     '</span><span>© ' + new Date().getFullYear() + '</span></footer>';
   }
 
+  // Numbers in the stat cards count up from 0 the first time they scroll into view.
+  function countUp(root) {
+    var els = root.querySelectorAll('.stat-value');
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce || !('IntersectionObserver' in window)) return;
+    var run = function (el) {
+      var raw = el.textContent, m = raw.match(/^(\D*)(\d+(?:[.,]\d+)?)(.*)$/);
+      if (!m) return;
+      var end = parseFloat(m[2].replace(',', '.')), dec = (m[2].split(/[.,]/)[1] || '').length, start = null;
+      var step = function (ts) {
+        if (!start) start = ts;
+        var p = Math.min((ts - start) / 1400, 1), e = 1 - Math.pow(1 - p, 3);
+        el.textContent = m[1] + (end * e).toFixed(dec) + m[3];
+        if (p < 1) requestAnimationFrame(step); else el.textContent = raw;
+      };
+      requestAnimationFrame(step);
+    };
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { io.unobserve(en.target); run(en.target); } });
+    }, { threshold: 0.6 });
+    els.forEach(function (el) { el.style.fontVariantNumeric = 'tabular-nums'; io.observe(el); });
+  }
+
   function mount(content) {
     var app = document.getElementById('app');
     app.innerHTML = render(content);
@@ -123,6 +148,17 @@
       try { localStorage.setItem('mc-lang', lang); } catch (e) {}
       mount(content);
     });
+    countUp(app);
+    var menu = document.getElementById('menu'), bar = app.querySelector('.topbar');
+    if (menu && bar) {
+      menu.addEventListener('click', function () {
+        var open = bar.classList.toggle('open');
+        menu.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      bar.querySelectorAll('.nav a').forEach(function (a) {
+        a.addEventListener('click', function () { bar.classList.remove('open'); menu.setAttribute('aria-expanded', 'false'); });
+      });
+    }
   }
 
   // The admin panel sends unsaved drafts here for live preview.
